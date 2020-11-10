@@ -2,35 +2,22 @@ import React from 'react';
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Redirect,
+  Route
 } from 'react-router-dom';
-
-import './App.scss';
+import { Layout } from 'antd';
 import Home from './pages/Home';
-import SignIn from './pages/SignIn';
-import Layout from './shared/components/Layout';
-import Auth from './context/Auth';
 
 function App() {
   return (
-    <div className="App">
-      <Router>
-        <Auth.Provider>
-          <Switch>
-            <Route exact path="/">
-              <Layout>
-                <Home />
-              </Layout>
-            </Route>
-            <Route path="/sign-in">
-              <SignIn />
-            </Route>
-            <Redirect to="/sign-in" />
-          </Switch>
-        </Auth.Provider>
-      </Router>
-    </div>
+      <>
+        <Router>
+          <Layout>
+            <Switch>
+              <Route path="/" component={Home} />
+            </Switch>
+          </Layout>
+        </Router>
+      </>
   );
 }
 
