@@ -3,15 +3,11 @@
 ## This repo uses next stack:
 - React
 - Unstated-next
-- Material UI
+- Ant Design
 - Typescript
 - ESLint
 - Prettier
 - Jest
-
-## Styles
-
-You can use both MaterialUI `useStyles` or SCSS styles with CSS modules;
 
 ## Components generator
 
