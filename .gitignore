@@ -20,4 +20,5 @@
 
 *.log*
 
+/.idea
 /.firebase
