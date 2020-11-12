@@ -4,18 +4,19 @@ import {
   Switch,
   Route
 } from 'react-router-dom';
-import { Layout } from 'antd';
 import Home from './pages/Home';
+import PageLayout from "./shared/components/PageLayout";
 
 function App() {
   return (
       <>
         <Router>
-          <Layout>
+          <PageLayout>
             <Switch>
               <Route path="/" component={Home} />
+              <Route path="/" component={Home} />
             </Switch>
-          </Layout>
+          </PageLayout>
         </Router>
       </>
   );

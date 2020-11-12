@@ -1,10 +1,16 @@
 import React from 'react';
 
+import {Row, Col} from "antd";
+
 const Home = () => {
   return (
-    <div>
-      Home
-    </div>
+    <>
+      <Row>
+        <Col span={12}>
+          <h1>Home</h1>
+        </Col>
+      </Row>
+    </>
   );
 };
 

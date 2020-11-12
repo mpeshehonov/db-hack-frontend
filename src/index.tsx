@@ -4,6 +4,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 import './shared/styles/index.scss';
+import 'antd/dist/antd.css';
 import './App.scss';
 
 ReactDOM.render(<App />, document.getElementById('root'));
