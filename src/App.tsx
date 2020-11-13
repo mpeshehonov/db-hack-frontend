@@ -6,6 +6,7 @@ import {
 } from 'react-router-dom';
 import Home from './pages/Home';
 import PageLayout from "./shared/components/PageLayout";
+import Marketers from "./pages/Marketers";
 
 function App() {
   return (
@@ -13,8 +14,8 @@ function App() {
         <Router>
           <PageLayout>
             <Switch>
-              <Route path="/" component={Home} />
-              <Route path="/" component={Home} />
+              <Route path="/" component={Home} exact />
+              <Route path="/marketers" component={Marketers} exact />
             </Switch>
           </PageLayout>
         </Router>
