@@ -1,18 +1,29 @@
 import React, {useEffect, useState} from 'react';
-
-import {Row, Col, PageHeader, Slider, InputNumber} from "antd";
+import {Row, Col, PageHeader, Slider, InputNumber, Input} from "antd";
+import { maxRisk, sumValues } from '../../shared/utils/algorithms';
 
 const Home = () => {
   const [first, setFirst] = useState(0);
   const [second, setSecond] = useState(0);
   const [third, setThird] = useState(0);
   const [fourth, setFourth] = useState(0);
+  const [risk, setRisk] = useState(0);
+  const [maxName, setMaxName] = useState('none');
+  const [sum, setSum] = useState(0);
 
   useEffect(() => {
     setFirst(first);
     setSecond(second);
     setThird(third);
     setFourth(fourth);
+
+    const riskData = maxRisk(first, second, third, fourth);
+    setMaxName(riskData.name);
+    setRisk(riskData.value);
+
+    const sumData = sumValues(first, second, third, fourth);
+    setSum(sumData);
+
   }, [first, second, third, fourth]);
 
   return (
@@ -91,6 +102,43 @@ const Home = () => {
             max={100}
             onChange={() => setFourth}
             value={fourth}
+          />
+        </Col>
+      </Row>
+      <h3>Риск</h3>
+      <Row style={{ margin: '16px' }}>
+        <Col span={12}>
+          <Slider
+            disabled
+            min={0}
+            max={5000}
+            onChange={setRisk}
+            value={risk}
+          />
+        </Col>
+        <Col span={4}>
+          <Input
+            onChange={() => setMaxName}
+            value={maxName}
+            placeholder="Максимальное значение"
+          />
+        </Col>
+      </Row>
+      <h3>Сумма</h3>
+      <Row style={{ margin: '16px' }}>
+        <Col span={12}>
+          <Slider
+            disabled
+            min={0}
+            max={400}
+            onChange={setSum}
+            value={sum}
+          />
+        </Col>
+        <Col span={4}>
+          <Input
+            onChange={() => setSum}
+            value={sum}
           />
         </Col>
       </Row>
