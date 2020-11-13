@@ -1,5 +1,5 @@
 {
   "styles": ".scss",
   "useTS": true,
-  "useModules": true
+  "useModules": false
 }

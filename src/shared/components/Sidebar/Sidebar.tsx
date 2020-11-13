@@ -8,8 +8,8 @@ const Sidebar = () => {
     <Layout.Sider width={250} className="site-layout-background">
       <Menu
         style={{ width: 256 }}
-        defaultSelectedKeys={['brigada']}
-        defaultOpenKeys={['otdel']}
+        defaultSelectedKeys={['building']}
+        defaultOpenKeys={['company', 'building', 'buh', 'marketing']}
         mode="inline"
       >
         <SubMenu
@@ -18,7 +18,7 @@ const Sidebar = () => {
             <span>Строительная компания</span>
           }
         >
-          <SubMenu key="otdel" title="Строительный отдел">
+          <SubMenu key="building" title="Строительный отдел">
             <Menu.ItemGroup key="brigada" title="Бригада 1">
               <Menu.Item key="1">Каменьщики</Menu.Item>
               <Menu.Item key="2">Арматурщики</Menu.Item>
