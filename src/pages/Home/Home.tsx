@@ -13,6 +13,7 @@ const Home = () => {
 
   const initChart = () => {
     const chart = am4core.create('chart', am4pluginsForceDirected.ForceDirectedTree);
+    chart.zoomable = true;
 
     const networkSeries = chart.series.push(new am4pluginsForceDirected.ForceDirectedSeries())
     networkSeries.dataFields.id = "name";
