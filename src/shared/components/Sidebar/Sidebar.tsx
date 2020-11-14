@@ -1,5 +1,6 @@
 import React from 'react';
 import { Layout, Menu } from 'antd';
+import {NavLink} from "react-router-dom";
 
 const { SubMenu } = Menu;
 
@@ -12,6 +13,7 @@ const Sidebar = () => {
         defaultOpenKeys={['company', 'building', 'buh', 'marketing']}
         mode="inline"
       >
+        <Menu.Item key="0"><NavLink to="/">Главная</NavLink></Menu.Item>
         <SubMenu
           key="company"
           title={
@@ -20,7 +22,7 @@ const Sidebar = () => {
         >
           <SubMenu key="building" title="Строительный отдел">
             <Menu.ItemGroup key="brigada" title="Бригада 1">
-              <Menu.Item key="1">Каменьщики</Menu.Item>
+              <Menu.Item key="1">Каменщики</Menu.Item>
               <Menu.Item key="2">Арматурщики</Menu.Item>
               <Menu.Item key="3">Доставщики</Menu.Item>
               <Menu.Item key="4">Грузчики</Menu.Item>
@@ -31,7 +33,7 @@ const Sidebar = () => {
             <Menu.Item key="6">Бухгалтера</Menu.Item>
           </SubMenu>
           <SubMenu key="marketing" title="Отдел маркетинга">
-            <Menu.Item key="7">Маркетологи</Menu.Item>
+            <Menu.Item key="7"><NavLink to="/marketers">Маркетологи</NavLink></Menu.Item>
             <Menu.Item key="8">SMM</Menu.Item>
           </SubMenu>
         </SubMenu>
