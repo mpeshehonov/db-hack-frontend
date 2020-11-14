@@ -1,5 +1,5 @@
-import React, {useEffect, useLayoutEffect, useState} from 'react';
-import {PageHeader} from "antd";
+import React, {useEffect, useLayoutEffect, useRef, useState} from 'react';
+import {PageHeader, InputNumber} from "antd";
 import * as am4core from "@amcharts/amcharts4/core";
 import * as am4pluginsForceDirected from "@amcharts/amcharts4/plugins/forceDirected";
 
@@ -9,7 +9,10 @@ import {request} from "../../shared/utils/api";
 am4core.useTheme(am4themesAnimated);
 
 const Home = () => {
+  const chartRef = useRef({data: {}, validateData () {}});
+
   const [data, setData] = useState([]);
+  const [id, setId] = useState(0);
 
   const initChart = () => {
     const chart = am4core.create('chart', am4pluginsForceDirected.ForceDirectedTree);
@@ -56,49 +59,45 @@ const Home = () => {
     
     networkSeries.data = data;
 
-    let selectedNode: any;
+    chartRef.current = chart;
 
-    networkSeries.nodes.template.events.on("up", (event: any) => {
-      let node = event.target;
-      if (!selectedNode) {
-        node.outerCircle.disabled = false;
-        node.outerCircle.strokeDasharray = "3,3";
-        selectedNode = node;
-      } else if (selectedNode === node) {
-        node.outerCircle.disabled = true;
-        node.outerCircle.strokeDasharray = "";
-        selectedNode = undefined;
-      } else {
-        node = event.target;
-
-        const link = node.linksWith.getKey(selectedNode.uid);
-
-        if (link) {
-          node.unlinkWith(selectedNode);
-        }
-        else {
-          node.linkWith(selectedNode, 0.2);
-        }
-      }
-    })
+    return () => {
+      chart.dispose();
+    };
   }
 
   useLayoutEffect(() => {
     initChart();
+  }, []);
+
+  useLayoutEffect(() => {
+    chartRef.current.data = data;
   }, [data]);
-  
+
   useEffect(() => {
-    request('', {
+    const url = id > 0 ? `?id=${id}` : '';
+
+    request(url, {
       method: 'GET'
     }).then((r) => setData(r));
-  }, []);
+
+    if (id === 0) {
+      setInterval(() => {
+        request('', {
+          method: 'GET'
+        }).then((r) => setData(r));
+      }, 15 * 1000);
+    }
+  }, [id]);
+
   return (
     <>
       <PageHeader
         className="site-page-header"
         title="Главная"
-        subTitle="Система для строительных компаний"
       />
+      Идентификатор задачи:&nbsp;&nbsp;
+      <InputNumber min={0} max={10} onChange={(value: any) => setId(value)} value={id} />
       <div id="chart" style={{ width: "100%", height: "600px" }}/>
     </>
   );

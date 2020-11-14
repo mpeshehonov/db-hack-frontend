@@ -12,10 +12,10 @@ const Header = () => {
           <Link to="/">Главная</Link>
         </Menu.Item>
         <Menu.Item key="2">
-          <Link to="/algorithms">Алгоритмы</Link>
+          <Link to="/forecast">Прогноз</Link>
         </Menu.Item>
         <Menu.Item key="3">
-          <Link to="/forecast">Прогноз</Link>
+          <Link to="/plan">План</Link>
         </Menu.Item>
       </Menu>
     </Layout.Header>

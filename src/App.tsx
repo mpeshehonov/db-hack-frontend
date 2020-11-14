@@ -7,7 +7,7 @@ import {
 import Home from './pages/Home';
 import PageLayout from "./shared/components/PageLayout";
 import Marketers from "./pages/Marketers";
-import Algorithms from "./pages/Algorithms";
+import Plan from "./pages/Plan";
 
 function App() {
   return (
@@ -15,8 +15,8 @@ function App() {
         <Router>
           <PageLayout>
             <Switch>
+              <Route path="/plan" component={Plan} />
               <Route path="/forecast" component={Marketers} />
-              <Route path="/algorithms" component={Algorithms} />
               <Route path="/" component={Home} exact />
             </Switch>
           </PageLayout>

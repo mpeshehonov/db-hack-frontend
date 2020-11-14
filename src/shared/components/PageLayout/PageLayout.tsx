@@ -1,7 +1,6 @@
 
 import React, {FC} from 'react';
 import {Layout, Breadcrumb} from "antd";
-import Sidebar from "../Sidebar";
 import Header from "../Header";
 import './PageLayout.scss';
 
@@ -12,7 +11,6 @@ const PageLayout: FC<any> = ({ children }) => {
       <Layout className="layout">
         <Header/>
         <Layout>
-          <Sidebar/>
           <Layout.Content className="layout-content" style={{ padding: '0 50px' }}>
             <Breadcrumb style={{ margin: '16px 0' }}>
               <Breadcrumb.Item>Главная</Breadcrumb.Item>
@@ -21,7 +19,7 @@ const PageLayout: FC<any> = ({ children }) => {
           </Layout.Content>
         </Layout>
         <Layout.Footer style={{ textAlign: 'center' }}>
-          РосАтом ©20120 Created by NOVA</Layout.Footer>
+          РосАтом ©2020 Created by NOVA</Layout.Footer>
       </Layout>
     </>
   )

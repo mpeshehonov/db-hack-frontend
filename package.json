@@ -68,6 +68,7 @@
     "express": "^4.17.1",
     "express-favicon": "^2.0.1",
     "path": "^0.12.7",
-    "prettier": "^2.1.2"
+    "prettier": "^2.1.2",
+    "three": "^0.122.0"
   }
 }
