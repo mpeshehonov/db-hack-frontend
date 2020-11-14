@@ -43,9 +43,7 @@ const Home = () => {
   useEffect(() => {
     request('', {
       method: 'GET'
-    })
-      .then((r) => r.json())
-      .then((r) => setData(r));
+    }).then((r) => setData(r));
 
     initChart();
   }, []);
