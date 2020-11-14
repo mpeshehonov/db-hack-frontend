@@ -4,6 +4,7 @@ import React, { useRef, useLayoutEffect } from 'react';
 import './Marketers.scss';
 import * as am4core from "@amcharts/amcharts4/core";
 import * as am4charts from "@amcharts/amcharts4/charts";
+// @ts-ignore
 import am4themesAnimated from "@amcharts/amcharts4/themes/animated";
 import {PageHeader} from "antd";
 

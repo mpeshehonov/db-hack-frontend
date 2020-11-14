@@ -20,6 +20,8 @@ const PageLayout: FC<any> = ({ children }) => {
             <div className="site-layout-content">{children}</div>
           </Layout.Content>
         </Layout>
+        <Layout.Footer style={{ textAlign: 'center' }}>
+          РосАтом ©20120 Created by NOVA</Layout.Footer>
       </Layout>
     </>
   )
