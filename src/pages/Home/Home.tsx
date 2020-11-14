@@ -80,14 +80,6 @@ const Home = () => {
     request(url, {
       method: 'GET'
     }).then((r) => setData(r));
-
-    if (id === 0) {
-      setInterval(() => {
-        request('', {
-          method: 'GET'
-        }).then((r) => setData(r));
-      }, 15 * 1000);
-    }
   }, [id]);
 
   return (
