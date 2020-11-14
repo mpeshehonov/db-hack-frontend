@@ -6,6 +6,7 @@ import * as am4core from "@amcharts/amcharts4/core";
 import * as am4charts from "@amcharts/amcharts4/charts";
 import am4themesAnimated from "@amcharts/amcharts4/themes/animated";
 import {PageHeader} from "antd";
+import am4langRu from "@amcharts/amcharts4/lang/ru_RU";
 
 am4core.useTheme(am4themesAnimated);
 
@@ -14,7 +15,7 @@ const Marketers = () => {
 
     useLayoutEffect(() => {
         const x = am4core.create("chartdiv", am4charts.XYChart);
-
+        x.language.locale = am4langRu;
         x.paddingRight = 20;
 
         const data = [];
