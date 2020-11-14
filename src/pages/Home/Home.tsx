@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useLayoutEffect, useState} from 'react';
 import {PageHeader} from "antd";
 import * as am4core from "@amcharts/amcharts4/core";
 import * as am4pluginsForceDirected from "@amcharts/amcharts4/plugins/forceDirected";
@@ -15,37 +15,81 @@ const Home = () => {
     const chart = am4core.create('chart', am4pluginsForceDirected.ForceDirectedTree);
 
     const networkSeries = chart.series.push(new am4pluginsForceDirected.ForceDirectedSeries())
-    networkSeries.dataFields.linkWith = "linkWith";
-    networkSeries.dataFields.name = "name";
     networkSeries.dataFields.id = "name";
+    networkSeries.dataFields.linkWith = "linkWith";
     networkSeries.dataFields.value = "value";
+    networkSeries.dataFields.name = "name";
     networkSeries.dataFields.children = "children";
-
+    networkSeries.dataFields.color = "color";
+    networkSeries.nodes.template.tooltipText = "{name}:{value}";
+    networkSeries.nodes.template.fillOpacity = 1;
     networkSeries.nodes.template.label.text = "{name}"
     networkSeries.fontSize = 8;
     networkSeries.linkWithStrength = 0;
 
     const nodeTemplate = networkSeries.nodes.template;
     nodeTemplate.tooltipText = "{name}";
-    nodeTemplate.fillOpacity = 1;
-    nodeTemplate.label.hideOversized = true;
-    nodeTemplate.label.truncate = true;
 
     const linkTemplate = networkSeries.links.template;
     linkTemplate.strokeWidth = 1;
+
     const linkHoverState = linkTemplate.states.create("hover");
     linkHoverState.properties.strokeOpacity = 1;
     linkHoverState.properties.strokeWidth = 2;
 
+    nodeTemplate.events.on("over", (event: any ) => {
+      const {dataItem} = event.target;
+      dataItem.childLinks.each((link: any) => {
+        // eslint-disable-next-line no-param-reassign
+        link.isHover = true;
+      })
+    })
+
+    nodeTemplate.events.on("out", (event: any) => {
+      const {dataItem} = event.target;
+      dataItem.childLinks.each((link: any) => {
+        // eslint-disable-next-line no-param-reassign
+        link.isHover = false;
+      })
+    })
+    
     networkSeries.data = data;
+
+    let selectedNode: any;
+
+    networkSeries.nodes.template.events.on("up", (event: any) => {
+      let node = event.target;
+      if (!selectedNode) {
+        node.outerCircle.disabled = false;
+        node.outerCircle.strokeDasharray = "3,3";
+        selectedNode = node;
+      } else if (selectedNode === node) {
+        node.outerCircle.disabled = true;
+        node.outerCircle.strokeDasharray = "";
+        selectedNode = undefined;
+      } else {
+        node = event.target;
+
+        const link = node.linksWith.getKey(selectedNode.uid);
+
+        if (link) {
+          node.unlinkWith(selectedNode);
+        }
+        else {
+          node.linkWith(selectedNode, 0.2);
+        }
+      }
+    })
   }
+
+  useLayoutEffect(() => {
+    initChart();
+  }, [data]);
   
   useEffect(() => {
     request('', {
       method: 'GET'
-    })
-      .then((r) => setData(r))
-      .then(() => initChart());
+    }).then((r) => setData(r));
   }, []);
   return (
     <>
